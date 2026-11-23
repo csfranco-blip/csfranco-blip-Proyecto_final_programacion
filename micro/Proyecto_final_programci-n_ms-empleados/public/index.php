@@ -8,6 +8,9 @@ require __DIR__ . '/../vendor/autoload.php';
 
 require_once __DIR__ . '/../app/global/database_config.php';
 
+$routes = require __DIR__ . '/../app/Routes/endpoints.php'; 
+$routes($app);
+
 $app = AppFactory::create();
 require_once __DIR__ . '/../app/Middlewares/cors.php';
 
