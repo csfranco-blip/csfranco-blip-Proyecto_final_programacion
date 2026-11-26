@@ -1,15 +1,23 @@
 <?php
 
-namespace App\Presentation\Routers;
-
-use App\Presentation\Repositories\SeguimientoRepository;
+use App\Presentation\Repositories\IncapacidadRepository;
+use App\Presentation\Repositories\ReporteRepository;
 use Slim\Routing\RouteCollectorProxy;
 
-$app->group('/seguimientos', function (RouteCollectorProxy $group) {
-    $group->get('/incapacidad/{incapacidad_id}', [SeguimientoRepository::class, 'historial']);
-    $group->post('', [SeguimientoRepository::class, 'create']);
-    $group->put('/{id}', [SeguimientoRepository::class, 'update']);
-    $group->delete('/{id}', [SeguimientoRepository::class, 'delete']);
+$app->group('/incapacidades', function (RouteCollectorProxy $group) {
+    $group->get('', [IncapacidadRepository::class, 'all']);
+    $group->get('/{id}', [IncapacidadRepository::class, 'find']);
+    $group->post('', [IncapacidadRepository::class, 'create']);
+    $group->put('/{id}', [IncapacidadRepository::class, 'update']);
+    $group->delete('/{id}', [IncapacidadRepository::class, 'delete']);
 });
+
+$app->group('/reportes', function (RouteCollectorProxy $group) {
+    $group->get('/resumen', [ReporteRepository::class, 'resumen']);
+    $group->get('/fechas', [ReporteRepository::class, 'porFechas']);
+});
+
+
+
  
 
